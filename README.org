@@ -1,1 +1,2 @@
-* Hello World!
+* SDL2 Audio Experiments
+  Include a useful build script, for when you're tired of Makefiles.
