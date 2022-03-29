@@ -2,8 +2,11 @@
 #include <SDL2/SDL_audio.h>
 #include <SDL2/SDL_events.h>
 #include <assert.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+
+#define PI 3.14159265
 
 void white_noise(Sint16 *stream, size_t stream_len) {
   for (size_t i = 0; i < stream_len; i++) {
@@ -13,10 +16,18 @@ void white_noise(Sint16 *stream, size_t stream_len) {
   }
 }
 
+void sine_wave(Sint16 *stream, size_t stream_len) {
+  for (size_t i = 0; i < stream_len; i++) {
+    double period = PI / 180;
+    Sint16 value = (Sint16)100 * sin(5 * period * (double)i);
+    stream[i] = value;
+  }
+}
+
 void my_beep_callback(void *userdata, Uint8 *stream, int len) {
   (void)userdata;
   assert(len % 2 == 0);
-  white_noise((Sint16 *)stream, len / 2);
+  sine_wave((Sint16 *)stream, len / 2);
 }
 
 int main(int argc, char *argv[]) {
@@ -54,7 +65,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  printf("Ok\n");
+  printf("\nLeaving, bye!\n");
 
   SDL_Quit();
 
