@@ -1,2 +1,4 @@
 * SDL2 Audio Experiments
   Include a useful build script, for when you're tired of Makefiles.
+  
+  Basically need to port C++/SDL2 beep implementation.
